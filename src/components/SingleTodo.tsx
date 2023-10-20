@@ -4,7 +4,7 @@ import { Todo } from "./model";
 import { AiFillDelete, AiFillEdit, } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
 import "./style.css";
-import TodoList from "./TodoList";
+// import TodoList from "./TodoList";
 type Props = {
     todo: Todo,
     todos: Todo[],
@@ -12,12 +12,18 @@ type Props = {
 }
 const SingleTodo = ({ todo, todos, setTodos }: Props) => {
     const handlDone = (id: number) => {
-        setTodos(todos.map((todo) => todo.id === id ? {..todo, isDone: !TodoList.isDone } : todo))
+        // setTodos(todos.map((todo) => todo.id === id ? {..todo, isDone: !TodoList.isDone } : todo))
+        setTodos(todos.map((todo) => todo.id === id ? { ...todo, isDone: !todo.isDone } : todo))
     }
     return (
         <form action="" className="todos__single">
             <span className="todo">
-                {todo.todo}
+                {todo.isDone ? (
+                    <s className="todos_single-text">{todo.todo}</s>
+                ) :
+                    (
+                        <span className="todos_single-text">{todo.todo}</span>
+                    )}
             </span>
             <div>
                 <span className="icon">
