@@ -5,7 +5,7 @@ import { AiFillDelete, AiFillEdit, } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
 import { GrUpdate } from "react-icons/gr"
 import "./style.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import TodoList from "./TodoList";
 type Props = {
     todo: Todo,
@@ -28,12 +28,16 @@ const SingleTodo = ({ todo, todos, setTodos }: Props) => {
             todos.map((todo) => todo.id === id ? { ...todo, todo: editTodo } : todo));
         setEdit(false);
     }
+    const inputRef = useRef<HTMLInputElement>(null);
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, [edit])
     return (
         <form action="" className="todos__single">
             <span className="todo">
                 {edit ? (
                     <span>
-                        <input value={editTodo} onChange={(e) => { setEditTodo(e.target.value) }} className="todos__single--text" />
+                        <input ref={inputRef} value={editTodo} onChange={(e) => { setEditTodo(e.target.value) }} className="todos__single--text" />
                         <span className="icon" onClick={(e) => { handleEdit(e, todo.id) }} onSubmit={(e) => { handleEdit(e, todo.id) }}>
                             <GrUpdate />
                         </span>
