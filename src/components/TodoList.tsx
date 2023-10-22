@@ -8,9 +8,10 @@ interface Props {
     setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
     completedTodos: Todo[];
     setCompletedTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+    index: number;
 
 }
-const TodoList = ({ todos, setTodos }: Props) => {
+const TodoList = ({ todos, setTodos, completedTodos, setCompletedTodos, }: Props) => {
     return (
         <div className="container">
             <Droppable droppableId='TodosList'>
@@ -20,8 +21,13 @@ const TodoList = ({ todos, setTodos }: Props) => {
                             <span className="todos__heading">
                                 Active Tasks
                             </span>
-                            {todos.map((todo) => (
-                                <SingleTodo todo={todo} key={todo.id} todos={todos} setTodos={setTodos}
+                            {todos.map((todo, index) => (
+                                <SingleTodo
+                                    index={index}
+                                    todo={todo}
+                                    key={todo.id}
+                                    todos={todos}
+                                    setTodos={setTodos}
                                 />
                             ))}
                         </div>
@@ -34,8 +40,13 @@ const TodoList = ({ todos, setTodos }: Props) => {
                             <span className="todos__heading">
                                 Completed Tasks
                             </span>
-                            {todos.map((todo) => (
-                                <SingleTodo todo={todo} key={todo.id} todos={todos} setTodos={setTodos}
+                            {completedTodos.map((todo, index) => (
+                                <SingleTodo
+                                    index={index}
+                                    todo={todo}
+                                    key={todo.id}
+                                    todos={completedTodos}
+                                    setTodos={setCompletedTodos}
                                 />
                             ))}
                         </div>
