@@ -38,12 +38,12 @@ const SingleTodo = ({ todo, todos, setTodos, index }: Props) => {
         <Draggable draggableId={todo.id.toString()} index={index}>
             {
                 (provided) =>
-                    <form action="" className="todos__single" {...provided.dragHandleProps}{...provided.draggableProps} ref={provided.innerRef}>
+                    <form onSubmit={(e) => handleEdit(e, todo.id)} className="todos__single" {...provided.dragHandleProps}{...provided.draggableProps} ref={provided.innerRef}>
                         <span className="todo">
                             {edit ? (
                                 <span>
                                     <input ref={inputRef} value={editTodo} onChange={(e) => { setEditTodo(e.target.value) }} className="todos__single--text" />
-                                    <span className="icon" onClick={(e) => { handleEdit(e, todo.id) }} onSubmit={(e) => { handleEdit(e, todo.id) }}>
+                                    <span className="icon" onClick={(e) => { handleEdit(e, todo.id) }}>
                                         <GrUpdate />
                                     </span>
                                 </span>
